@@ -5,29 +5,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <!-- <link href="style.css" rel="stylesheet" type="text/css"> -->
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
+        html {
+            height: 100%;}
         
-        .b1 {
-            width: 350px;
-            height: 350px;
-            border: 1px solid #000;
-            background-color: aliceblue;
-            float: left;
-            margin :19px;
-            box-sizing: border-box;
-        }</style>
+        body {
+            height: 100%;
+            border-top: 3px solid black;
+            border-left: 3px solid black;
+        }
+        header {
+            height: 25%;
+            background-color: lightgrey;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+            
+        
+          
+        }
+        nav {
+            height: 25%;
+            background-color: lightgrey;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+            
+        }
+        section {
+            height: 25%;
+            background-color: gray;
+            display: flex;
+            
+            
+        }
+        article {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+        }
+        aside {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+        }
+        footer {
+            height: 25%;
+            background-color: azure;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+            
+        }
+    </style>
+   
 </head>
 <body>
-    <header>
-    <div id="wrap">
-        <div class="b1">Header</div>
-        
-    </div>
-    </header>
+    <header>Header</header>
+    <nav>Nav</nav>
+    <section>
+        <article>Article</article>
+        <aside>Aside</aside>
+    </section>
+    <footer>Footer</footer>
+
 </body>
 </html>
