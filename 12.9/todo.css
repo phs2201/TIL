@@ -1,0 +1,10 @@
+.header { /* .header 는 class="header" 를 의미함 */
+    color: blue;
+    font-size: medium;
+    text-align: center;
+    padding: 2em;
+    background-color: rgba(255,0,0,0.2);
+}
+input:focus {
+    background-color: yellow;
+}
