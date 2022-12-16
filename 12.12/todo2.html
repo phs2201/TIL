@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+            display: flex;
+        }
+    </style>
+</head>
+<script>
+    function createList(){
+        const inputbox = document.querySelector('.inputbox')
+
+        var btn = document.createElement('li');
+        btn.innerText = inputbox.value
+        inputbox.value = ''
+
+        var checkbox = document.createElement("INPUT");
+        checkbox.setAttribute("type", "checkbox");
+        btn.appendChild(checkbox);
+
+        var button = document.createElement("BUTTON");
+        button.innerText = 'X'
+        button.addEventListener('click', function(event) {
+            event.target.parentElement.remove()
+        })
+        btn.appendChild(button);
+
+        document.querySelector('ul').appendChild(btn);
+    }
+    
+</script>
+<body>
+    <input type="text" class="inputbox">
+    <input type="button" value="제출" onclick="
+        createList()
+    ">
+    <input type="button" value="모든">
+    <input type="button" value="완료">
+    <input type="button" value="할 일">
+    <ul>
+
+    </ul>
+</body>
+</html>
