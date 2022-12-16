@@ -1,75 +1,96 @@
-/*// 1. 입력에 대한 이벤트 리스너 등록하기
-// 할 일을 추가하기 위해서는 <input>요소로부터 이벤트 리스너를 등록하여, 이벤트를 캐치한 후, 입력받은 데이터를 배열에 순차적으로 담아야 함
-const todoInputElem = document.querySelector('.todo-input'); // input요소를 가져오기 위해 querySelector를 사용
+init ()
 
-let todos =[]; // 할 일을 담을 배열
-let id = 0; // 각각의 할 일을 유니크하게 구별할 수 있는 키 값을 설정하기 위해
-
-// init 함수는 todo.js 파일이 실행되자마다 호출되는 함수이다
-// input 요소를 담은 todoInputElem에 'keypress'에 대한 이벤트 리스너를 등록시킨다. 
-// 만약 입력되는 값이 'Enter'라면 appendTodos()함수에 e.target.value(input의 value)를 넘겨주고,
-// todoInputElem의 value 값을 초기화한다.
 function init() {
-    todoInputElem.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            appendTodos(e.target.value); todoInputElem.value = '';
+    setAddEvent(); // 내용 추가하는 이벤트 엔터눌렸을 떄
+    setPriorData(); // 기존데이터 가져오기
+    setFilter(); // 가져온 데이터 바탕으로 all , complete 눌렀을때 기준에 따라 보이도록
+}
+
+async function getData() {
+    return await fetch('https://jsonplaceholder.typicode.com/todos/').then(res => res.json()).then(result => result)
+}
+
+async function setPriorData() { // 기존 데이터 가져오는 기능
+    const data = await getData()
+    const ul = document.querySelector('ul')
+
+    data.forEach(e => { // 각각의 요소를 e로 받음
+        if(e.id < 5) {
+            ul.appendChild(createListDom(e.title, e.completed)) //ul 안에 li로 채우기
         }
-    });
+    })
 }
 
-init()
-// 2. 할 일 추가하기
-// 할 일의 타입 {id : number, isCompleted:boolean, content:stirng} id:유니크한 값, isCompleted : 할일의 완료상태, content:할일의 내용
-// newId는 새롭게 저장되는 할 일의 id 값이며, ++연산자를 통해 1씩 증가시킴으로써 id값이 중복되지 않게 해줌
-// newTodos 새롭게 저장될 todos 배열로 getAllTodos() 함수를 통해 이전 todos 배열을 가져온 후, 새롭게 추가된 할 일을 concat()을 통해 추가된 배열을 newTodosdp 저장한다.
-
-const setTodos = (newTodos) => {
-    todos = newTodos;
+function createListDom(title, completed) { // title:할일들
+    let li = document.createElement('li') // completed 가 조건 true면 checked함 아니면 공백
+    li.innerHTML = ` 
+        <input type="checkbox" ${completed ? 'checked' : ''}> 
+        <div>${title}</div>
+        <button>X</button>
+    `
+    let delBtn = li.querySelector('button') // li안에 있는 button을 추적
+    delBtn.addEventListener('click', removeParent) // 눌린 요소의 타겟의 부모 태그를 지워야 함
+    return li
 }
-const getAllTodos = () => {
-    return todos;
+
+function removeParent({target}) {
+    target.parentElement.remove() // 타겟의 부모태그를 지워줌
 }
-const appendTodos = (text) => {
-    const newId = id++;
-    const newTodos = getAllTodos().concat({id: newId, isCompleted: false, content:text})
-    // 스프레드 연산자 사용할 경우
-    // const newTodos = [...getAllTodos(), {id: newId, isCompleted: false, content: text}]
-    setTodos(newTodos)
-    paintTodos();
-}*/
 
-const button = document.querySelector('button')
-const ul = document.querySelector('ul')
-const input = document.querySelector('input')
+function setAddEvent() {
+    const input = document.querySelector('input') // input 이벤트 걸 준비
+    const button = document.querySelector('button') // button 이벤트 걸 준비
 
-button.addEventListener('click',()=>{
-    console.log(input.value)
-    let li = document.createElement('li')
-    li.innerText = input.value
-    ul.appendChild(li)
-    input.value=''
-})
+    input.addEventListener('keyup', (event) => {
+        event.key == 'Enter' ? inputToList() : '';
+    }) 
+    button.addEventListener('click', () => {
+        inputToList()
+    })
+}
 
-input.addEventListener('keyup', (event)=> {
-    console.log(event.key)
-    if (event.key =='Enter') {
-        console.log("enter key")
+function inputToList() {
+    const ul = document.querySelector('ul') // ul 태그를 가져온다
+    const input = document.querySelector('#input') // id값으로 가져오기
+    if(input.value) { // input.value 값이 실제 있을 때 함수를 실행
+        createListDom(input.value, false)
+        ul.appendChild(createListDom(input.value, false)) // 값을 넣어준다
+        input.value = ''
     }
-})
+}
 
+function setFilter() {
+    let filterBtns = document.querySelectorAll('.filter')
+    filterBtns.forEach(btn => { // 각각의 요소를 돌면서 반복하겠다
+        btn.addEventListener('click', () => {
+            filterList(btn.dataset.kind)
+        })
+    })
+}
 
+function filterList(kind) {
+    if(kind == 'all') displayAll();
+    if(kind == 'completed') displayCompleted();
+    if(kind == 'todo') displayTodo()
+}
 
+function displayAll() {
+    const lis =document.querySelectorAll('li')
+    lis.forEach(li => {
+        li.style.display = 'flex'
+    })
+}
 
+function displayCompleted() {
+    const lis =document.querySelectorAll('li')
+    lis.forEach(li => {
+        li.style.display = li.children[0].checked ? 'flex' : 'none' // input값이 true만 
+    })
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+function displayTodo() {
+    const lis =document.querySelectorAll('li')
+    lis.forEach(li => {
+        li.style.display = !li.children[0].checked ? 'flex' : 'none' // displaycomplete와 반대로 !를 넣어줘서
+    })
+}

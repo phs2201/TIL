@@ -4,25 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keyword" content="todo"> <!-- 검색엔진 최적화(SEO)를 위해 keywords 정의-->
-    <meta name="description" content="todo list page"> <!-- 웹페이지의 설명을 정의한다-->
-    <meta name="author" content="HS"> <!-- 웹 페이지의 저자를 명기한다-->
-    <meta http-equiv="refresh" content="30"> <!-- 웹페이지를 30초 마다 리프레시 한다-->
     <title>Document</title>
-    <link rel="stylesheet" href="todo.css">
     <script defer src="todo.js"></script>
+    <link rel="stylesheet" href="todo.css">
 </head>
 <body>
-    <input type="text"><button>제출</button>
+    <input type="text" id="input"><button>제출</button>
+    <button class="filter" data-kind="all">all</button>
+    <button class="filter" data-kind="completed">completed</button>
+    <button class="filter" data-kind="todo">todo</button>
     <ul>
-        <li>
-            제거
-            <button>x</button>
-        </li>
-        <li>
-            <input type="checkbox">체크박스
-        </li>
     </ul>
-    
 </body>
 </html>
