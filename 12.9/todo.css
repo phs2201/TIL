@@ -1,10 +1,16 @@
-.header { /* .header 는 class="header" 를 의미함 */
-    color: blue;
-    font-size: medium;
-    text-align: center;
-    padding: 2em;
-    background-color: rgba(255,0,0,0.2);
+* {
+    margin: 0;
+    padding: 0;
+    border: 1px solid pink;
 }
-input:focus {
-    background-color: yellow;
+
+ul div {
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
 }
