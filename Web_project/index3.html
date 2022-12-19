@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성</title>
+    <link rel="stylesheet" type="text/css" href="index3.css">
+</head>
+<body>
+    <script src="index3.js"></script>
+<div class="list-box">
+    <ul id="list">
+      <li>
+        <div>
+          <p class="title">게시글 제목<span class="reply-count">[4]</span></p>
+          <p class="user-info fs-12 txt-gray">작성자 | 2022-08-02 9:15:69</p>
+        </div>
+        <div>
+          <p class="content">게시글 본문 내용</p>
+        </div>
+        <div class="reply-box fs-12">
+          <div class="reply-write">
+            <input type="text" id="replyUserName" style="width: 18%;">
+            <input type="text" id="replyContent" style="width: 70%;">
+            <button id="btnAddReply" class="btn btn--gray">등록</button>
+          </div>
+          <div class="reply-list">
+            <p class="reply">[작성자] 댓글내용 | 2022-08-02 9:15:69</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="write-box">
+    <div>
+      <label for="userName">작성자</label>
+      <input type="text" id="userName">
+    </div>
+    <div>
+      <label for="title">제목</label>
+      <input type="text" id="title">
+    </div>
+    <div>
+      <label for="content">내용</label>
+      <textarea id="content"></textarea>
+    </div>
+    <button id="btnAddTxt" class="btn btn--black">글쓰기</button>
+  </div>
+  
+</body>
+</html>
